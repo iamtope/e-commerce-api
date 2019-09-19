@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
+const {Types: {ObjectId}} = mongoose;
+const validateObjectId = (id) => ObjectId.isValid(id) && (new ObjectId(id)).toString() === id;
 
 const PostSchema = mongoose.Schema({
-    id:{
+    title:{
+        type: String,
+        required: true
+    },
+    author:{
         type: String,
         required: true
     },
@@ -9,7 +15,7 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    title:{
+    intro:{
         type: String,
         required: true
     },
@@ -18,8 +24,7 @@ const PostSchema = mongoose.Schema({
         required: true
     },
     created_at: {
-        type: Date,
-        default: Date.now
+        type: String
     }
 });
 

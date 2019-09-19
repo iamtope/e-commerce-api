@@ -5,7 +5,6 @@ const cors = require('cors');
 const path = require('path'); 
 
 const app = express();
-
 const db = require('./config/db').database;
 
 // Database Connection
@@ -40,8 +39,10 @@ app.get('/', (req, res) => {
 });
 
 const postRoutes = require('./routes/apis/post');
+const userRoutes = require('./routes/apis/user');
 
-app.use('/api/posts', postRoutes);
+app.use('/api/post', postRoutes);
+app.use('/api/user', userRoutes);
 
 app.listen(port, () => {
     console.log('server started on Port', port)

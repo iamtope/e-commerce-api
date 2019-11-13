@@ -4,18 +4,17 @@ const Post = require('../../models/Post');
 
 // Create a post
 router.post('/add', (req, res, next) => {
-    const title = req.body.title;
-    const author = req.body.author;
+    const product = req.body.product;
+    const description = req.body.description;
     const image = req.body.image;
-    const intro = req.body.intro;
-    const content = req.body.content;
+    const price = req.body.price;
+
     
     newPost = new Post({
-        title: title,
-        author: author,
+        product: product,
+        description: description,
         image: image,
-        intro: intro,
-        content: content,
+        price: price,
         created_at: new Date()
     });
     newPost.save()
@@ -42,7 +41,35 @@ router.get('/all', (req, res, next) => {
         .then((posts) => {
             res.json(posts);
         })
-        .catch(err => console.log(err))
+        .catch(err => 
+            console.log(err))
+});
+
+// validate items in checkout array
+router.get('/checkout', (req, res, next) => {
+    // Post.find()
+    //     .then((posts)=>{
+    //         if(posts.length === 0){
+    //             return res.status(409).json({
+    //                 message: "cart cannot be empty on checkout"
+    //             })
+    //         }else{
+    //             res.json(posts)
+    //         }
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
+    if(!req.body.cart.length) {
+        return res.status(409).json({
+            message: "Cart can't be empty"
+        })
+    } else {
+        return res.status(200).json({
+            message: "Checkout complete!"
+        })
+    }
+
 });
 
 // to update a Post
@@ -52,14 +79,13 @@ router.put('/update/:id', (req, res, next) => {
     // find the post by id from the databasse
         Post.findByIdAndUpdate(id)
         .then(post => {
-            post.title = req.body.title;
-            post.author = req.body.author;
+            post.product = req.body.product;
+            post.description = req.body.description;
             post.image = req.body.image;
-            post.intro = req.body.intro;
-            post.content = req.body.content;
+            post.price = req.body.price;
             post.save()
             .then(post =>{
-                res.send({message: 'Post updated succesfully',
+                res.send({message: 'Product updated succesfully',
                 status: 'success',
                 post: post})
             })
@@ -76,7 +102,7 @@ router.delete('/:id', (req, res, next) => {
     .then(post => {
         post.delete()
         .then(post =>{
-            res.send({message: 'Post deleted succesfully',
+            res.send({message: 'Product deleted succesfully',
             status: 'success',
             post: post})
 

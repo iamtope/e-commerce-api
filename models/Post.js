@@ -3,11 +3,11 @@ const {Types: {ObjectId}} = mongoose;
 const validateObjectId = (id) => ObjectId.isValid(id) && (new ObjectId(id)).toString() === id;
 
 const PostSchema = mongoose.Schema({
-    title:{
+    product:{
         type: String,
         required: true
     },
-    author:{
+    description:{
         type: String,
         required: true
     },
@@ -15,11 +15,7 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    intro:{
-        type: String,
-        required: true
-    },
-    content:{
+    price:{
         type: String,
         required: true
     },

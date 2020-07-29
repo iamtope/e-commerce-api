@@ -40,11 +40,9 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-    console.log(req.body)
     User.find({ username: req.body.username })
     .exec()
     .then(user => {
-        console.log(user)
         if (user.length < 1) {
             return res.status(401).json({
                 message: 'Auth failed'

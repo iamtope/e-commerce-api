@@ -8,7 +8,7 @@ const app = express();
 const db = require('./config/db').database;
 
 // Database Connection
-
+console.log('db is', db);
 mongoose.connect(db, {
     useNewUrlParser: true
 })

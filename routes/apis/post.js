@@ -39,7 +39,9 @@ router.get('/single/:id', (req, res, next) => {
 router.get('/all', (req, res, next) => {
     Post.find()
         .then((posts) => {
-            res.json(posts);
+            const result = {};
+            result.data = posts;
+            res.json(result);
         })
         .catch(err => 
             console.log(err))

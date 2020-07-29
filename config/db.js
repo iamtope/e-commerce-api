@@ -1,4 +1,4 @@
 module.exports = {
-    database: 'mongodb://localhost:27017/blog_api_app',
-    secret: '1245678'
+    database: 'mongodb+srv://asperlogo:1Adabass@cluster0-y0j45.mongodb.net/<dbname>?retryWrites=true&w=majority',
+    secret: process.env.secret
 };
